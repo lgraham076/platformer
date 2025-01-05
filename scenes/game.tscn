@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfpi3k00alc3c"]
+[gd_scene load_steps=9 format=3 uid="uid://bfpi3k00alc3c"]
 
 [ext_resource type="PackedScene" uid="uid://chr5ee5toumje" path="res://scenes/player.tscn" id="1_6lgpq"]
 [ext_resource type="Texture2D" uid="uid://8mnnpg2w5t5l" path="res://assets/sprites/world_tileset.png" id="2_gsm43"]
+[ext_resource type="PackedScene" uid="uid://dhuc08qucmd1r" path="res://scenes/platform.tscn" id="3_y7jok"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yrck5"]
 texture = ExtResource("2_gsm43")
@@ -169,10 +170,48 @@ texture = ExtResource("2_gsm43")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_yrck5")
 
+[sub_resource type="Animation" id="Animation_iwbdi"]
+resource_name = "Move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(319, 276), Vector2(433, 277)]
+}
+
+[sub_resource type="Animation" id="Animation_d8i5p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(319, 276)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o6duc"]
+_data = {
+"Move": SubResource("Animation_iwbdi"),
+"RESET": SubResource("Animation_d8i5p")
+}
+
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_6lgpq")]
-position = Vector2(192, 257)
+position = Vector2(189, 272)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-1, -8)
@@ -182,4 +221,17 @@ position_smoothing_enabled = true
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_041ou")
 format = 2
-layer_0/tile_data = PackedInt32Array(1179656, 0, 0, 1179657, 0, 0, 1114122, 0, 0, 1179658, 0, 1, 1114123, 0, 0, 1179659, 0, 1, 1114124, 0, 0, 1179660, 0, 1, 1179652, 0, 0, 1245188, 0, 1, 1179653, 0, 0, 1245189, 0, 1, 1179654, 0, 0, 1245190, 0, 1, 1179655, 0, 0, 1245191, 0, 1, 1245192, 0, 1, 1245193, 0, 1, 1245194, 0, 1, 1245195, 0, 1, 1245196, 0, 1, 1114125, 589824, 0, 1114126, 655360, 0, 1114127, 720896, 0, 1114128, 0, 0, 1179664, 0, 1, 1245200, 0, 1, 1114129, 0, 0, 1179665, 0, 1, 1245201, 0, 1, 1114130, 0, 0, 1179666, 0, 1, 1245202, 0, 1, 983065, 0, 0, 983066, 0, 0, 983067, 0, 0, 983068, 0, 0, 983069, 0, 0, 983070, 0, 0, 983071, 0, 0, 983072, 0, 0, 1048601, 0, 1, 1048602, 0, 1, 1048603, 0, 1, 1048604, 0, 1, 1048605, 0, 1, 1048606, 0, 1, 1048607, 0, 1, 1048608, 0, 1, 917534, 0, 5, 851998, 0, 4, 720926, 0, 4, 786462, 0, 4, 655390, 0, 3, 1114117, 196608, 8, 1048581, 196608, 7, 917509, 131072, 4)
+layer_0/tile_data = PackedInt32Array(1179656, 0, 0, 1179657, 0, 0, 1114122, 0, 0, 1179658, 0, 1, 1114123, 0, 0, 1179659, 0, 1, 1114124, 0, 0, 1179660, 0, 1, 1179652, 0, 0, 1245188, 0, 1, 1179653, 0, 0, 1245189, 0, 1, 1179654, 0, 0, 1245190, 0, 1, 1179655, 0, 0, 1245191, 0, 1, 1245192, 0, 1, 1245193, 0, 1, 1245194, 0, 1, 1245195, 0, 1, 1245196, 0, 1, 1114125, 589824, 0, 1114126, 655360, 0, 1114127, 720896, 0, 1114128, 0, 0, 1179664, 0, 1, 1245200, 0, 1, 1114129, 0, 0, 1179665, 0, 1, 1245201, 0, 1, 1114130, 0, 0, 1179666, 0, 1, 1245202, 0, 1, 1114117, 196608, 8, 1048581, 196608, 7, 917509, 131072, 4, 1114140, 0, 0, 1179676, 0, 1, 1114141, 0, 0, 1179677, 0, 1, 1114142, 0, 0, 1179678, 0, 1, 1114143, 0, 0, 1179679, 0, 1, 1114144, 0, 0, 1179680, 0, 1, 1114145, 0, 0, 1179681, 0, 1, 1114146, 0, 0, 1179682, 0, 1, 786465, 0, 3, 852001, 0, 4, 917537, 0, 4, 983073, 0, 4, 1048609, 0, 5, 1114147, 0, 0, 1179683, 0, 1)
+
+[node name="Platform" parent="." instance=ExtResource("3_y7jok")]
+position = Vector2(319, 276)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform"]
+root_node = NodePath("../../Platform2")
+libraries = {
+"": SubResource("AnimationLibrary_o6duc")
+}
+autoplay = "Move"
+
+[node name="Platform2" parent="." instance=ExtResource("3_y7jok")]
+position = Vector2(191, 242)
